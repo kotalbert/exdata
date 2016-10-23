@@ -1,18 +1,9 @@
 # Exploratory Data Analysis: Course Project 2
-# Plot 1: Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? 
+# Plot 1: Have total emissions from PM2.5 decreased in the United States from 
+# 1999 to 2008? 
 
-
-# Reading data into data frames 
-# if they are not in memory
-
- if (!exists("NEI")) {
-   NEI <- readRDS("data/summarySCC_PM25.rds");
- }
- 
-
- if (!exists("SCC")) {
-   SCC <- readRDS("data/Source_Classification_Code.rds");
- }
+# Get the data for plotting
+source("./getdata.R")
 
 #Using dplyr package to transform the data frame
 library(dplyr);

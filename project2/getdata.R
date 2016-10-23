@@ -1,22 +1,25 @@
 # Exploratory Data Analysis: Course Project 2
 # Getting and transforming data.
 
-# Downloading file
+# Downloading and decompressing files
+# Only if zip file not present in data directory
 
-url = "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip";
-target.file = "data/pm25.zip";
+if (!file.exists("./pm25.zip")) {
+    message("Files not present. Downloading and decompressing")
+    u <- "https://d396qusza40orc.cloudfront.net/exdata%2Fdata%2FNEI_data.zip"
+    download.file(u, "./pm25.zip")
+    unzip(zipfile="./pm25.zip")
+    message("Files downloaded and decompressed")
+} else
+    message("Files present in working directory")
 
-download.file(url, target.file);
+# Check if files already in memory. If not read files as data frames.
+if (!exists("smry")) {
+    message("reading summarySCC_PM25.rds")
+    smry <- readRDS("./summarySCC_PM25.rds")
+}
 
-# Unziping file
-unzip(zipfile = target.file, exdir = "data");
-
-# Reading data into data frames
-
-NEI <- readRDS("data/summarySCC_PM25.rds")
-SCC <- readRDS("data/Source_Classification_Code.rds")
-
-# Boxplot of MPG by Car Cylinders 
-boxplot(mpg~cyl,data=mtcars, main="Car Milage Data", 
-        xlab="Number of Cylinders", ylab="Miles Per Gallon")
-
+if (!exists("scc")) {
+    message("reading Source_Classification_Code.rds")
+    scc <- readRDS("./Source_Classification_Code.rds")
+}
