@@ -3,12 +3,14 @@
 # 1999 to 2008? 
 
 # Get the data for plotting
+# Data stored in smry and scc data frames
 source("./getdata.R")
+
 s <- smry
 
 # Create factor for each year indicator
 s$year <- factor(s$year)
-# apply log10 to Emissions, add 1e-3 to log for zeros
+# apply log10 to Emissions, add 1e-3 to remove zeros
 s$log10_emis <- log10(s$Emissions + 0.001)
 
 # Using palette to color the boxplots

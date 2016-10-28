@@ -3,6 +3,7 @@
 # in Baltimore City?
 
 # Get the data for plotting
+# Data stored in smry and scc data frames
 source("./getdata.R")
 
 # Filter data for Baltimore City
@@ -11,7 +12,7 @@ balt <- subset(smry, fips == "24510")
 # Get SCC for motor-related sources
 mot_scc <- unique(scc$SCC[grep("^Mobile - On-Road", scc$EI.Sector)])
 
-# Filter data for combustion-related sources
+# Filter data for moto-related sources
 balt_mot <- subset(balt, SCC %in% mot_scc)
 
 # Merge scc with data to form ggplot facets
@@ -32,10 +33,10 @@ get_fuel_type <- function(sector) {
 # Create factor Diesel/Gasoline
 balt_mot_scc$fuel_type <- sapply(balt_mot_scc$EI.Sector, get_fuel_type)
 
-# Create factor for each source
+# Create factor for each year
 balt_mot_scc$year <- factor(balt_mot_scc$year)
 
-# apply log10 to Emissions, add 1e-3 to log for zeros
+# apply log10 to Emissions, add 1e-3 to remove zeros
 balt_mot_scc$log10_emis <- log10(balt_mot_scc$Emissions + 0.001)
 
 library(ggplot2)
