@@ -16,6 +16,6 @@ library(RColorBrewer)
 
 png("./figures/plot1.png")
 boxplot(log10_emis ~ year, data=s, col=brewer.pal(4,"BrBG"), 
-        xlab = "Observation year", ylab = "log10(Emissions+1e-3)", 
+        xlab = "Observation year", ylab = expression(paste(log[10],"(Emmisions+1e-3)")), 
         main="Change in overall emissions from all sources")
 dev.off()
